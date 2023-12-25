@@ -62,7 +62,6 @@ app.post('/login', async (req, res) => {
         const userData = await Register.findOne({email})
         const isMatch = await bcrypt.compare(password, userData.password)
 
-        
 //now we have to verify the auth token when user logs in
         const token = await userData.generateAuthToken()
 
