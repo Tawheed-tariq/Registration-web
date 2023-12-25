@@ -17,11 +17,23 @@
     justify-content: center;
     align-items: center;
 }
-.landing-page h1{
+.landing-page h1, .secret-page h1{
     text-align: center;
     color: white;
     font-weight: bolder;
     font-size: xx-large;
+}
+.secret-page{
+    height: 60vh;
+    width: 100%;
+    background-image: url('../img/carosel1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .form h2{
