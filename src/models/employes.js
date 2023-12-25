@@ -56,7 +56,7 @@ const employeeSchema = new mongoose.Schema({
 //middelware for generating auth tokens
 employeeSchema.methods.generateAuthToken = async function(){
     try {
-        const token = jwt.sign({_id: this._id}, "thisisasecretkeyusedasanexamplefortokenauthenticationshouldbeminimum32characterslong")
+        const token = jwt.sign({_id: this._id}, process.env.SECRET_KEY)
         this.tokens = this.tokens.concat({token:token}) //when key and value both are same we can only write one of them e.g; {token}
         await this.save() //save to database
         return token

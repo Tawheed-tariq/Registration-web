@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 require('./db/connection') 
@@ -6,6 +7,7 @@ const hbs = require('hbs')
 const bcrypt = require('bcryptjs')
 const Register = require('./models/employes')
 port = process.env.PORT || 8000
+
 
 const viewsPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
@@ -62,7 +64,6 @@ app.post('/login', async (req, res) => {
         const userData = await Register.findOne({email})
         const isMatch = await bcrypt.compare(password, userData.password)
 
-        
 //now we have to verify the auth token when user logs in
         const token = await userData.generateAuthToken()
 
