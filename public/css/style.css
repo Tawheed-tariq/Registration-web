@@ -1,0 +1,32 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+.landing-page{
+    height: 60vh;
+    width: 100%;
+    background-image: url('../img/carosel3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.landing-page h1{
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: xx-large;
+}
+
+.form h2{
+    font-size: 32px;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+}
