@@ -1,12 +1,13 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-require('./db/connection') 
+require('./db/connection') //database 
 const path = require('path')
-const hbs = require('hbs')
-const bcrypt = require('bcryptjs')
-const Register = require('./models/employes')
-const cookieParser = require('cookie-parser')
+const hbs = require('hbs') //view engine
+const bcrypt = require('bcryptjs') //for password hashing
+const Register = require('./models/employes') //models schema and collections
+const cookieParser = require('cookie-parser') //for reading cookies
+const auth = require('./middleware/auth')
 port = process.env.PORT || 8000
 
 
@@ -28,9 +29,19 @@ app.use(express.urlencoded({extended:false}))
 app.get("/", (req, res) => {
     res.render('index')
 })
-app.get("/secret", (req, res) => {
-    console.log(req.cookies.jwt) //this will print the data stored in cookie after login
+app.get("/secret", auth ,(req, res) => { //here we added a middleware 'auth' which is executed before the callback function
+    // console.log(req.cookies.jwt) //this will print the data stored in cookie after login
     res.render('secret')
+})
+app.get('/logout', auth, async (req, res) => {
+    try {
+        res.clearCookie('jwt')
+        console.log('logged out successfully')
+        await req.user.save()
+        res.render('login')
+    } catch (error) {
+        res.status(500).send(error)
+    }
 })
 
 app.get('/register', (req,res) => {
