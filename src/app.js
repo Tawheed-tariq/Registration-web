@@ -35,7 +35,18 @@ app.get("/secret", auth ,(req, res) => { //here we added a middleware 'auth' whi
 })
 app.get('/logout', auth, async (req, res) => {
     try {
+        //deleting the users current token form the database (single logout)
+        req.user.tokens = req.user.tokens.filter((elem) => {
+            return elem.token != req.token
+        })
+
+        //for logout from all devices(logout all devices)
+        // req.user.tokens = []
+
+        //clear cookie that was made on login
         res.clearCookie('jwt')
+
+
         console.log('logged out successfully')
         await req.user.save()
         res.render('login')
